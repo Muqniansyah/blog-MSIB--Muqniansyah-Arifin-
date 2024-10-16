@@ -52,8 +52,8 @@
             <label for="isPublished" class="form-check-label" value="{{ old('is_published') ?? $post->is_published }}"></label>
         </div>
         <div class="d-flex justify-content-between mt-3"> 
-            <button type="submit" class="btn btn-primary mt-2">Submit</button>
-            <a href="{{ route('posts.index') }}" class="btn btn-outline-secondary mb-3">Back</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{{ route('posts.index') }}" class="btn btn-outline-secondary">Back</a>
         </div>
     </form>
     

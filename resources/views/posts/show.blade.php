@@ -27,7 +27,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label fw-bold">Image:</label>
-                    <p class="form-control-plaintext">{{ old('description') ?? $category->description }}</p>
+                    <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="img-fluid">
                     <!-- {{ old('image') ?? $post->image }} -->
                 </div>
                 <div class="mb-3">

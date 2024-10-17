@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AuthorController extends Controller {
     public function index(){
         // Mengambil data author dengan pagination
-        $authors = Author::paginate(2); // Menggunakan paginate untuk pagination
+        $authors = Author::paginate(5); // Menggunakan paginate untuk pagination
         // mengembalikkan tampilan view
         return view('authors.index', compact('authors')); 
     }

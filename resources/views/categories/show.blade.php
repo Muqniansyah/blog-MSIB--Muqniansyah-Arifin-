@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="card-footer text-end">
-                <a href="{{ route('authors.index') }}" class="btn btn-secondary">Back</a>
+                <a href="{{ route('categories.index') }}" class="btn btn-secondary">Back</a>
             </div>
         </div>
     </div>

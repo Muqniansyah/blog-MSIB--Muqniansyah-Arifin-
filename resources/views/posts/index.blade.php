@@ -45,4 +45,23 @@
             </div>
         @endif
     </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item {{ $posts->onFirstPage() ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ $posts->previousPageUrl() }}">Previous</a>
+                </li>
+                @for ($i = 1; $i <= $posts->lastPage(); $i++)
+                    <li class="page-item {{ $i == $posts->currentPage() ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $posts->url($i) }}">{{ $i }}</a>
+                    </li>
+                @endfor
+                <li class="page-item {{ $posts->hasMorePages() ? '' : 'disabled' }}">
+                    <a class="page-link" href="{{ $posts->nextPageUrl() }}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 @endsection

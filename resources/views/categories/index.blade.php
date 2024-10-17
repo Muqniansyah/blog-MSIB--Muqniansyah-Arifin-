@@ -44,4 +44,23 @@
             @endif
         </tbody>
     </table>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-4">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item {{ $categories->onFirstPage() ? 'disabled' : '' }}">
+                    <a class="page-link" href="{{ $categories->previousPageUrl() }}">Previous</a>
+                </li>
+                @for ($i = 1; $i <= $categories->lastPage(); $i++)
+                    <li class="page-item {{ $i == $categories->currentPage() ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $categories->url($i) }}">{{ $i }}</a>
+                    </li>
+                @endfor
+                <li class="page-item {{ $categories->hasMorePages() ? '' : 'disabled' }}">
+                    <a class="page-link" href="{{ $categories->nextPageUrl() }}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 @endsection

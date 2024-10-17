@@ -9,7 +9,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        // Mengambil data author dengan pagination
+        $categories = Category::paginate(5); // Menggunakan paginate untuk pagination
         return view('categories.index', compact('categories'));
     }
 

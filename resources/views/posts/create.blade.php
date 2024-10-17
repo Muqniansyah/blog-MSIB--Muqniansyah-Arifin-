@@ -29,7 +29,7 @@
 
         <div class="form-group mb-3">
             <label for="category">Category</label>
-            <select name="category_id" id="category" class="form-control" required>
+            <select name="category_id" id="category" class="form-select" required>
                 <option value="">Choose a category</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -39,7 +39,7 @@
 
         <div class="form-group mb-3">
             <label for="author">Author</label>
-            <select name="author_id" id="author" class="form-control" required>
+            <select name="author_id" id="author" class="form-select" required>
                 <option value="">Choose an author</option>
                 @foreach ($authors as $author)
                     <option value="{{ $author->id }}">{{ $author->name }}</option>
@@ -53,7 +53,8 @@
         </div>
 
         <div class="form-check mb-3">
-            <input type="checkbox" name="is_published" id="isPublished" class="form-check-input">
+            <input type="hidden" name="is_published" value="0"> <!-- Nilai default ketika checkbox tidak dicentang -->
+            <input type="checkbox" name="is_published" id="isPublished" class="form-check-input" value="1">
             <label for="isPublished" class="form-check-label">Publish</label>
         </div>
 

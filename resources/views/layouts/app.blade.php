@@ -55,9 +55,12 @@
                             <a class="nav-link" href="{{ route('authors.index') }}">Author</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <!-- Align user link to the right -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
                         <li class="nav-item">
                             <a class="nav-link me-5" href="{{ route('user.index') }}"><i class="bi bi-person"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-5" href="{{ route('user.index') }}"><i class="bi bi-box-arrow-right"></i> Logout</a>
                         </li>
                     </ul>
                 </div>

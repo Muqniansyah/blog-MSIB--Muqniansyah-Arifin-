@@ -11,7 +11,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('category')->get();
+        // Mengambil data post dengan pagination dan memuat relasi category
+        $posts = Post::with('category')->paginate(5); // Menggunakan eager loading dan pagination sekaligus
         return view('posts.index', compact('posts'));
     }
 
@@ -104,6 +105,17 @@ class PostController extends Controller
 
     // fungsi untuk show
     public function show(Post $post) {
-        return view('posts.show', compact('post'));
+        // Memuat relasi kategori untuk objek $post yang sudah ada
+        $post->load('category');
+        $post->load('author');
+    
+        // Jika ada old('category_id'), cari category berdasarkan old value
+        $category = old('category_id') ? Category::find(old('category_id')) : $post->category;
+        
+        // Jika ada old('author_id'), cari author berdasarkan old value
+        $author = old('author_id') ? Author::find(old('author_id')) : $post->author;
+
+        // Mengirim $post dan $category ke view
+        return view('posts.show', compact('post', 'category', 'author'));
     }
 }

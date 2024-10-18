@@ -6,11 +6,20 @@ use App\Models\Author;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller {
-    public function index(){
-        // Mengambil data author dengan pagination
-        $authors = Author::paginate(5); // Menggunakan paginate untuk pagination
-        // mengembalikkan tampilan view
-        return view('authors.index', compact('authors')); 
+    public function index(Request $request){
+        // Ambil kata kunci pencarian
+        $search = $request->input('search');
+        
+        // Jika ada pencarian, filter data author berdasarkan nama
+        if ($search) {
+            $authors = Author::where('name', 'like', "%{$search}%")->paginate(5);
+        } else {
+            // Jika tidak ada pencarian, tampilkan semua data dengan pagination
+            $authors = Author::paginate(5);
+        }
+
+        // Kembalikan ke view dengan data authors dan pencarian
+        return view('authors.index', compact('authors', 'search'));
     }
 
     // fungsi membuat data

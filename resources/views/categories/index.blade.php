@@ -4,9 +4,21 @@
 
 @section('content')
     <h1 class="mb-4 text-center">Categories</h1>
-    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">
-        <i class="bi bi-plus-circle"></i> Create Category
-    </a>
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <!-- Tombol Create Category  -->
+        <a href="{{ route('categories.create') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Create Category
+        </a>
+
+        <!-- Form pencarian -->
+        <form action="{{ route('categories.index') }}" method="GET" class="d-flex">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search categories..." value="{{ request('search') }}">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
     
     <table class="table table-bordered table-striped">
         <thead>

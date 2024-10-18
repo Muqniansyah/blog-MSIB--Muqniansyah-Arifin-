@@ -4,9 +4,21 @@
 
 @section('content')
     <h1 class="mb-4 text-center">Posts</h1>
-    <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3">
-        <i class="bi bi-plus-circle"></i> Create Post
-    </a>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <!-- Tombol Create Posts -->
+        <a href="{{ route('posts.create') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Create Post
+        </a>
+
+        <!-- Form pencarian -->
+        <form action="{{ route('posts.index') }}" method="GET" class="d-flex">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search posts..." value="{{ request('search') }}">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
     
     <div class="list-group">
         @if ($posts->isNotEmpty())

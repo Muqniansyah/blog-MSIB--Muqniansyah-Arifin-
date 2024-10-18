@@ -9,11 +9,21 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil data post dengan pagination dan memuat relasi category
-        $posts = Post::with('category')->paginate(5); // Menggunakan eager loading dan pagination sekaligus
-        return view('posts.index', compact('posts'));
+        // Ambil kata kunci pencarian
+        $search = $request->input('search');
+        
+        // Jika ada pencarian, filter data posts berdasarkan title
+        if ($search) {
+            $posts = Post::where('title', 'like', "%{$search}%")->paginate(5);
+        } else {
+            // Jika tidak ada pencarian, tampilkan semua data dengan pagination
+            $posts = Post::paginate(5);
+        }
+
+        // Kembalikan ke view dengan data posts dan pencarian
+        return view('posts.index', compact('posts', 'search'));
     }
 
     public function create()

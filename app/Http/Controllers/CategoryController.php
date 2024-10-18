@@ -7,11 +7,21 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil data author dengan pagination
-        $categories = Category::paginate(5); // Menggunakan paginate untuk pagination
-        return view('categories.index', compact('categories'));
+        // Ambil kata kunci pencarian
+        $search = $request->input('search');
+        
+        // Jika ada pencarian, filter data category berdasarkan nama
+        if ($search) {
+            $categories = Category::where('name', 'like', "%{$search}%")->paginate(5);
+        } else {
+            // Jika tidak ada pencarian, tampilkan semua data dengan pagination
+            $categories = Category::paginate(5);
+        }
+
+        // Kembalikan ke view dengan data categories dan pencarian
+        return view('categories.index', compact('categories', 'search'));
     }
 
     public function create()

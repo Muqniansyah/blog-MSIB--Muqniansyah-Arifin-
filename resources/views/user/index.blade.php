@@ -27,7 +27,7 @@
                 </div>
                 <div class="text-end mt-4">
                     <!-- <a href="#" class="btn btn-warning me-2">Edit Profile</a> -->
-                    <a href="/" class="btn btn-secondary">Back</a>
+                    <a href="{{ route('home') }}" class="btn btn-secondary">Back</a>
                 </div>
             </div>
         </div>

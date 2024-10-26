@@ -36,23 +36,23 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Blog MSIB</a>
+                <img src="{{ asset('images/msib.png') }}" alt="My Image" class="navbar-brand" style="width: 100px; height: auto;">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
+                            <a class="nav-link {{ Request::is('categories') ? 'active' : '' }}" href="{{ route('categories.index') }}">Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('posts.index') }}">Post</a>
+                            <a class="nav-link {{ Request::is('posts') ? 'active' : '' }}" href="{{ route('posts.index') }}">Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('authors.index') }}">Author</a>
+                            <a class="nav-link {{ Request::is('authors') ? 'active' : '' }}" href="{{ route('authors.index') }}">Author</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
@@ -60,7 +60,7 @@
                             <a class="nav-link me-5" href="{{ route('user.index') }}"><i class="bi bi-person"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-5" href="{{ route('user.index') }}"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                            <a class="nav-link me-5" href="/"><i class="bi bi-box-arrow-right"></i> Logout</a>
                         </li>
                     </ul>
                 </div>

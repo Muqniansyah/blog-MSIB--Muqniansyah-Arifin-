@@ -1,5 +1,6 @@
 <?php
 // mengimpor kelas Controller dari namespace yang ditentukan.
+
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthorController;
@@ -8,8 +9,12 @@ use App\Http\Controllers\PostQbuilderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
+
+Route::get('/home', function () {
+    return view('welcome');
+})->name('home');
 
 // routing categories
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
@@ -41,3 +46,5 @@ Route::delete('/authors/{author}', [AuthorController::class, 'destroy'])->name('
 // routing user
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
+// untuk menyertakan file auth.php ke dalam file route utama (web.php). 
+require __DIR__.'/auth.php';

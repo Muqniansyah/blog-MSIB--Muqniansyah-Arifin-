@@ -60,7 +60,12 @@
                             <a class="nav-link me-5" href="{{ route('user.index') }}"><i class="bi bi-person"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-5" href="/"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                            <form action="{{ route('logout') }}" method="POST" class="d-inline nav-link me-5">
+                                @csrf
+                                <button type="submit" class="btn btn-link nav-link" style="display: inline; cursor: pointer;">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>

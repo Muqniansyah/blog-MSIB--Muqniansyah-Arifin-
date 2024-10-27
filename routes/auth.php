@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,9 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 // routing login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+// routing logout
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 // routing forgot password
 Route::get('/reset', [ForgotPasswordController::class, 'showResetPassword'])->name('reset.form');

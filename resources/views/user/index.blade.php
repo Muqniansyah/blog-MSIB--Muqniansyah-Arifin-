@@ -10,19 +10,15 @@
                 <div class="profile-info p-4" style="background-color: #f9f9f9; border-radius: 10px; border: 1px solid #ddd;">
                     <div class="mb-4 d-flex">
                         <label class="me-3 fw-bold" style="width: 150px; color: #555;">Name:</label>
-                        <span>Admin</span>
+                        <span>{{ $user->name }}</span>
                     </div>
                     <div class="mb-4 d-flex">
                         <label class="me-3 fw-bold" style="width: 150px; color: #555;">Email:</label>
-                        <span>Admin@gmail.com</span>
-                    </div>
-                    <div class="mb-4 d-flex">
-                        <label class="me-3 fw-bold" style="width: 150px; color: #555;">Username:</label>
-                        <span>Admin123</span>
+                        <span>{{ $user->email }}</span>
                     </div>
                     <div class="mb-4 d-flex">
                         <label class="me-3 fw-bold" style="width: 150px; color: #555;">Joined:</label>
-                        <span>15-07-2024</span>
+                        <span>{{ $user->created_at->format('d M Y') }}</span>
                     </div>
                 </div>
                 <div class="text-end mt-4">

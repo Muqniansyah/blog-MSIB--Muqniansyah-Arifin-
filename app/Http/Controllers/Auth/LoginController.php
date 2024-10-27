@@ -16,19 +16,17 @@ class LoginController extends Controller
         // Validasi input
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|string|min:8',
         ]);
 
-        // Cek kredensial menggunakan Auth::attempt()
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            // Login berhasil
-            return redirect()->route('home')->with('success', 'Login berhasil!');
+        if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
+            // Autentikasi berhasil, arahkan ke dashboard
+            return redirect()->route('home');
         }
-
-        // Login gagal
+    
+        // Autentikasi gagal, kembali ke form login dengan error
         return back()->withErrors([
             'email' => 'Email atau password salah.',
-        ]);
+        ])->onlyInput('email');
     }
 }

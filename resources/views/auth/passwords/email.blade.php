@@ -35,28 +35,29 @@
             <div class="col-md-6">
                 <div class="card mt-5">
                     <h2 class="text-center mb-4">Reset Password</h2>
-                    <form action="#" method="POST"> 
-                        @csrf
-                        <input type="hidden" name="token" value="#">
+                    
+                    <!-- pesan status dan error -->
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
+                    @if ($errors->has('email'))
+                        <div class="alert alert-danger">
+                            {{ $errors->first('email') }}
+                        </div>
+                    @endif
+
+                    <form action="{{ route('password.email') }}" method="POST">
+                        @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" name="email" id="email" required autofocus placeholder="Enter your email">
                         </div>
-
-                        <div class="mb-3">
-                            <label for="password" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100">Reset Password</button>
-                        <div class="text-start mt-1">
-                            <a href="/" class="btn btn-link">
+                        <button type="submit" class="btn btn-primary w-100">Send Password Reset Link</button>
+                        <div class="text-start mt-3">
+                            <a href="{{ route('login.form') }}" class="btn btn-link">
                                 <i class="bi bi-arrow-left"></i> 
                             </a>
                         </div>

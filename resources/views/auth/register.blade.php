@@ -27,6 +27,26 @@
         .btn-secondary:hover {
             background-color: #5a6268;
         }
+
+        .password-toggle-satu {
+            position: absolute;
+            top: 52%;
+            right: 46px;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .password-toggle-dua {
+            position: absolute;
+            top: 66%;
+            right: 46px;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -54,6 +74,8 @@
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required placeholder="Create a password">
+                            <!-- onclick="togglePassword('password', this)" — Memanggil fungsi dengan ID input 'password' dan mengirimkan elemen ikon itu sendiri (this). -->
+                            <i class="bi bi-eye password-toggle-satu" onclick="togglePassword('password', this)"></i> 
                             @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -61,6 +83,8 @@
                         <div class="mb-3">
                             <label for="password_confirmation" class="form-label">Confirm Password</label>
                             <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation" required placeholder="Confirm your password">
+                            <!-- onclick="togglePassword('password_confirmation', this)" — Memanggil fungsi dengan ID input 'password_confirmation' dan mengirimkan elemen ikon itu sendiri. -->
+                            <i class="bi bi-eye password-toggle-dua" onclick="togglePassword('password_confirmation', this)"></i>
                             @error('password_confirmation')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -81,5 +105,18 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function togglePassword(fieldId, toggleIcon) {
+            // fieldId: Ini adalah string yang berisi ID dari input password yang ingin Anda toggle (misalnya, 'password' atau 'password_confirmation').
+            const passwordField = document.getElementById(fieldId);
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.classList.replace('bi-eye', 'bi-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.classList.replace('bi-eye-slash', 'bi-eye');
+            }
+        }
+    </script>
 </body>
 </html>

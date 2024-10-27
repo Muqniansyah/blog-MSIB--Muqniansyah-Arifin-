@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>New Password</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <style>
         .card {
-            background-color: rgba(255, 255, 255, 0.8); 
-            backdrop-filter: blur(10px); 
+            background-color: rgba(255, 255, 255, 0.8); /* Transparansi */
+            backdrop-filter: blur(10px); /* Efek blur */
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
@@ -28,13 +28,19 @@
             background-color: #0056b3;
         }
 
-        .form-check-label {
-            font-size: 0.9rem;
+        .password-toggle-satu {
+            position: absolute;
+            top: 37%;
+            right: 46px;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 1.25rem;
+            cursor: pointer;
         }
 
-        .password-toggle {
+        .password-toggle-dua {
             position: absolute;
-            top: 44%;
+            top: 59%;
             right: 46px;
             transform: translateY(-50%);
             color: #6c757d;
@@ -48,33 +54,31 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card mt-5">
-                    <h2 class="text-center mb-4">Login</h2>
-                    <form action="{{ route('login') }}" method="POST">
+                    <h2 class="text-center mb-4">New Password</h2>
+                    <form action="{{ route('password.update') }}" method="POST"> 
                         @csrf
+                        <input type="hidden" name="token" value="{{ $token }}">
+                        <input type="hidden" name="email" value="{{ request('email') }}">
+
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autofocus placeholder="Enter your email">
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required placeholder="Enter your password">
-                            <i class="bi bi-eye password-toggle" onclick="togglePassword()"></i>
+                            <label for="password" class="form-label">New Password</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required placeholder="Create a new password">
+                            <i class="bi bi-eye password-toggle-satu" onclick="togglePassword('password', this)"></i> 
                             @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                            <label class="form-check-label" for="remember">Remember Me</label>
+
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation" required placeholder="Confirm your new password">
+                            <i class="bi bi-eye password-toggle-dua" onclick="togglePassword('password_confirmation', this)"></i>
+                            @error('password_confirmation')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
-                        <div class="text-center mt-3">
-                            <a href="{{ route('password.request') }}" class="text-decoration-none">Forgot Password?</a>
-                        </div>
-                        <p class="text-center mt-3">Belum punya akun? <a href="{{ route('register.form') }}">Daftar</a></p>
+
+                        <button type="submit" class="btn btn-primary w-100">Reset Password</button>
                         <div class="text-start mt-1">
                             <a href="/" class="btn btn-link">
                                 <i class="bi bi-arrow-left"></i> 
@@ -88,16 +92,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function togglePassword() {
-            const passwordField = document.getElementById('password');
-            const passwordToggle = document.querySelector('.password-toggle');
-            
+        function togglePassword(fieldId, toggleIcon) {
+            // fieldId: Ini adalah string yang berisi ID dari input password yang ingin Anda toggle (misalnya, 'password' atau 'password_confirmation').
+            const passwordField = document.getElementById(fieldId);
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
-                passwordToggle.classList.replace('bi-eye', 'bi-eye-slash');
+                toggleIcon.classList.replace('bi-eye', 'bi-eye-slash');
             } else {
                 passwordField.type = 'password';
-                passwordToggle.classList.replace('bi-eye-slash', 'bi-eye');
+                toggleIcon.classList.replace('bi-eye-slash', 'bi-eye');
             }
         }
     </script>
